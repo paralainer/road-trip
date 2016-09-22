@@ -1,0 +1,6 @@
+.idea
+node_modules
+typings
+road-trip.iml
+app/**.js
+app/**.js.map

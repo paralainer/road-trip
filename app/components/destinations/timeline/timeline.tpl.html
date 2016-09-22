@@ -1,0 +1,25 @@
+<div>
+    <form #newDestinationForm="ngForm" (ngSubmit)="addDestination();">
+        <label for="newDestination">Add {{getLabel()}}</label>
+        <input type="text"
+               id="newDestination"
+               required
+               name="destinationName"
+               [(ngModel)]="newDestinationName">
+        <button type="submit" [disabled]="!newDestinationForm.form.valid">Add</button>
+    </form>
+    <div *ngIf="destinations.length > 0" class="addFirst" (click)="nextIndex = 0">+</div>
+    <div *ngFor="let dest of destinations; let isLast = last; let i = index" style="display: inline-block">
+        <div class="destination" [style.background-color]="dest.color">
+            <span>{{dest.name}}</span>
+            <span class="remove" (click)="deleteDestination(dest.id)">X</span>
+        </div>
+        <div class="destinationJoin"
+             *ngIf="!isLast"
+             (click)="nextIndex = i + 1"
+             title="Press to insert here">
+            <span>-></span>
+        </div>
+    </div>
+    <div *ngIf="destinations.length > 0" class="addLast" (click)="nextIndex = destinations.length">+</div>
+</div>

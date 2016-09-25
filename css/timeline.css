@@ -8,15 +8,16 @@
     padding: 10px;
 }
 
-.addFirst, .addLast{
+.addFirst, .addLast, .addBetween{
     cursor: pointer;
     display: inline-block;
+    text-align: center;
 }
 
-.destinationJoin {
-    display: inline-block;
-    cursor: pointer;
+.addFirst.dragOver, .addLast.dragOver, .addBetween.dragOver {
+    width: 30px;
 }
+
 
 .destination .remove {
     cursor: pointer;

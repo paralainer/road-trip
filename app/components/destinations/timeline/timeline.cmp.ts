@@ -39,6 +39,12 @@ export class Timeline {
             .catch((e) => console.log(e));
     }
 
+    moveDestination(destinationId: string, afterDestination: string) {
+        this.destinationsService.moveDestination(destinationId, afterDestination)
+            .then(() => this.refreshDestinations());
+
+    }
+
     deleteDestination(destinationId: string) {
         this.destinationsService.deleteDestination(destinationId)
             .then(() => this.refreshDestinations())

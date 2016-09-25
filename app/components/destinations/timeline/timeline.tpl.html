@@ -8,18 +8,38 @@
                [(ngModel)]="newDestinationName">
         <button type="submit" [disabled]="!newDestinationForm.form.valid">Add</button>
     </form>
-    <div *ngIf="destinations.length > 0" class="addFirst" (click)="nextIndex = 0">+</div>
+    <div *ngIf="destinations.length > 0"
+         class="addFirst"
+         (click)="nextIndex = 0"
+         (drop)="moveDestination($event.dataTransfer.getData('destinationId'), '_first'); $event.target.classList.remove('dragOver');"
+         (dragenter)="$event.target.classList.add('dragOver')"
+         (dragleave)="$event.target.classList.remove('dragOver')"
+         (dragover)="$event.preventDefault()"
+    >+</div>
     <div *ngFor="let dest of destinations; let isLast = last; let i = index" style="display: inline-block">
-        <div class="destination" [style.background-color]="dest.color">
+        <div class="destination"
+             [style.background-color]="dest.color"
+             draggable="true"
+             (dragstart)="$event.dataTransfer.setData('destinationId', dest.id); $event.dataTransfer.dropEffect = 'move'"
+        >
             <span>{{dest.name}}</span>
             <span class="remove" (click)="deleteDestination(dest.id)">X</span>
         </div>
-        <div class="destinationJoin"
+        <div class="addBetween"
              *ngIf="!isLast"
+             (drop)="moveDestination($event.dataTransfer.getData('destinationId'), dest.id); $event.target.classList.remove('dragOver');"
+             (dragenter)="$event.target.classList.add('dragOver')"
+             (dragleave)="$event.target.classList.remove('dragOver')"
+             (dragover)="$event.preventDefault()"
              (click)="nextIndex = i + 1"
-             title="Press to insert here">
-            <span>-></span>
-        </div>
+             title="Press to insert here">-></div>
     </div>
-    <div *ngIf="destinations.length > 0" class="addLast" (click)="nextIndex = destinations.length">+</div>
+    <div *ngIf="destinations.length > 0"
+         class="addLast"
+         (click)="nextIndex = destinations.length"
+         (drop)="moveDestination($event.dataTransfer.getData('destinationId'), '_last'); $event.target.classList.remove('dragOver');"
+         (dragenter)="$event.target.classList.add('dragOver')"
+         (dragleave)="$event.target.classList.remove('dragOver')"
+         (dragover)="$event.preventDefault()"
+    >+</div>
 </div>

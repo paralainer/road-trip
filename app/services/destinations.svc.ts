@@ -29,6 +29,9 @@ export class DestinationsService {
 
 
     public moveDestination(destinationId: string, afterDestination: string) {
+        if (destinationId === afterDestination){
+            return Promise.resolve();
+        }
         let dest = this.destinations.find(d => d.id === destinationId);
         this.destinations = this.destinations.filter(d => d.id !== destinationId);
         if (afterDestination === "_first") {
